@@ -4,17 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import static org.junit.jupiter.api.Assumptions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-@TestInstance(Lifecycle.PER_CLASS)
+@DisplayName("when running MathUtils")
 class MathUtilsTest {
 
 	MathUtils mathUtils;
@@ -24,13 +22,20 @@ class MathUtilsTest {
 		mathUtils = new MathUtils();
 	}
 
-	@Test
-	@DisplayName("Testing add method")
-	void testAdd() {
+	@Nested
+	@DisplayName("Add Method")
+	class AddTest {
+		@Test
+		@DisplayName("when adding two positive number")
+		void testAddPositive() {
+			assertEquals(2, mathUtils.add(1, 1), "should return the right sum");
+		}
 
-		int expected = 2;
-		int actual = mathUtils.add(1, 1);
-		assertEquals(expected, actual, "The add method should add two numbers");
+		@Test
+		@DisplayName("when adding two negative number")
+		void testAddNegative() {
+			assertEquals(-2, mathUtils.add(-1, -1), "should return the right sum");
+		}
 	}
 
 	@Test
@@ -56,11 +61,8 @@ class MathUtilsTest {
 	@Test
 	@DisplayName("multiply method")
 	void testMultiply() {
-		assertAll(
-				() -> assertEquals(4, mathUtils.multiply(2, 2)),
-				() -> assertEquals(0, mathUtils.multiply(2, 0)),
-				() -> assertEquals(-2, mathUtils.multiply(2, -1))
-				);
+		assertAll(() -> assertEquals(4, mathUtils.multiply(2, 2)), () -> assertEquals(0, mathUtils.multiply(2, 0)),
+				() -> assertEquals(-2, mathUtils.multiply(2, -1)));
 	}
 
 }
