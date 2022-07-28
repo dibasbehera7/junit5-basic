@@ -1,5 +1,6 @@
 package com.dibasb;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -51,4 +52,15 @@ class MathUtilsTest {
 	void testDisabled() {
 		fail("this test should be disabled");
 	}
+
+	@Test
+	@DisplayName("multiply method")
+	void testMultiply() {
+		assertAll(
+				() -> assertEquals(4, mathUtils.multiply(2, 2)),
+				() -> assertEquals(0, mathUtils.multiply(2, 0)),
+				() -> assertEquals(-2, mathUtils.multiply(2, -1))
+				);
+	}
+
 }
