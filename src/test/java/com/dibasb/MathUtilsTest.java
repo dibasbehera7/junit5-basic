@@ -1,10 +1,12 @@
 package com.dibasb;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -14,22 +16,13 @@ class MathUtilsTest {
 
 	MathUtils mathUtils;
 
-	@BeforeAll
-	void beforeALlInit() {
-		System.out.println("execution of @beforeAll method()");
-	}
-
 	@BeforeEach
 	void init() {
 		mathUtils = new MathUtils();
 	}
 
-	@AfterEach
-	void cleanup() {
-		System.out.println("Cleaning up...");
-	}
-
 	@Test
+	@DisplayName("Testing add method")
 	void testAdd() {
 
 		int expected = 2;
@@ -49,4 +42,10 @@ class MathUtilsTest {
 
 	}
 
+	@Test
+	@Disabled
+	@DisplayName("TDD method should not run")
+	void testDisabled() {
+		fail("this test should be disabled");
+	}
 }
