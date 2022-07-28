@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("when running MathUtils")
@@ -26,6 +27,7 @@ class MathUtilsTest {
 
 	@Nested
 	@DisplayName("Add Method")
+	@Tag("Math")
 	class AddTest {
 		@Test
 		@DisplayName("when adding two positive number")
@@ -41,14 +43,25 @@ class MathUtilsTest {
 	}
 
 	@Test
+	@Tag("Math")
 	void testDivide() {
 		boolean isServerUp = false;
 		assumeTrue(isServerUp);
 		assertThrows(ArithmeticException.class, () -> mathUtils.divide(1, 0), "Divide by zero should throw");
 	}
 
-	@RepeatedTest(value = 3)
-	void testComputeCircleRadius(RepetitionInfo repetitionInfo) {
+	@Test
+	@Tag("Math")
+	@DisplayName("multiply method")
+	void testMultiply() {
+		assertAll(() -> assertEquals(4, mathUtils.multiply(2, 2)), () -> assertEquals(0, mathUtils.multiply(2, 0)),
+				() -> assertEquals(-2, mathUtils.multiply(2, -1)));
+	}
+
+	
+	@Test
+	@Tag("Circle")
+	void testComputeCircleRadius() {
 		assertEquals(314.159265358979323846, mathUtils.computeCircleArea(10), "Should return right circle area");
 
 	}
@@ -60,11 +73,5 @@ class MathUtilsTest {
 		fail("this test should be disabled");
 	}
 
-	@Test
-	@DisplayName("multiply method")
-	void testMultiply() {
-		assertAll(() -> assertEquals(4, mathUtils.multiply(2, 2)), () -> assertEquals(0, mathUtils.multiply(2, 0)),
-				() -> assertEquals(-2, mathUtils.multiply(2, -1)));
-	}
 
 }
