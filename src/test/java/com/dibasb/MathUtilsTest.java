@@ -14,15 +14,22 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestReporter;
 
 @DisplayName("when running MathUtils")
 class MathUtilsTest {
 
 	MathUtils mathUtils;
+	TestInfo testInfo;
+	TestReporter testReporter;
 
 	@BeforeEach
-	void init() {
+	void init(TestInfo testInfo, TestReporter testReporter) {
+		this.testInfo = testInfo;
+		this.testReporter = testReporter;
 		mathUtils = new MathUtils();
+		testReporter.publishEntry("Running "+testInfo.getDisplayName()+" with tags "+testInfo.getTags());
 	}
 
 	@Nested
@@ -58,7 +65,6 @@ class MathUtilsTest {
 				() -> assertEquals(-2, mathUtils.multiply(2, -1)));
 	}
 
-	
 	@Test
 	@Tag("Circle")
 	void testComputeCircleRadius() {
@@ -72,6 +78,5 @@ class MathUtilsTest {
 	void testDisabled() {
 		fail("this test should be disabled");
 	}
-
 
 }
