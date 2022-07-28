@@ -2,16 +2,29 @@ package com.dibasb;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class MathUtilsTest {
 
 	MathUtils mathUtils;
+	
+	@BeforeAll
+	static void beforeALlInit()
+	{
+		System.out.println("execution of @beforeAll method()");
+	}
 
 	@BeforeEach
 	void init() {
 		mathUtils = new MathUtils();
+	}
+
+	@AfterEach
+	void cleanup() {
+		System.out.println("Cleaning up...");
 	}
 
 	@Test
