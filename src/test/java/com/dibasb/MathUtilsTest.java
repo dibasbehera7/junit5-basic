@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import static org.junit.jupiter.api.Assumptions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -32,7 +34,8 @@ class MathUtilsTest {
 
 	@Test
 	void testDivide() {
-
+		boolean isServerUp = false;
+		assumeTrue(isServerUp);
 		assertThrows(ArithmeticException.class, () -> mathUtils.divide(1, 0), "Divide by zero should throw");
 	}
 
